@@ -1,0 +1,21 @@
+<h2>
+    <%= @group.name %>
+    <% if @usergroups.include?(params[:group_id].to_i) %>
+        <a href="<%= groups_leave_path params[:group_id] %>" data-method="patch"><button type="button">Leave Group</button></a>
+    <% else %>
+        <a href="<%= groups_join_path params[:group_id] %>" data-method="patch"><button type="button">Join Group</button></a>
+    <% end %>
+</h2>
+<%= @group.desc %><br>
+<h3>
+    Creator:
+    <% if @group.creator == session[:user_id] %>
+        YOU
+    <% else %>
+        <%= @creator.first_name %>&nbsp;<%= @creator.last_name %>
+    <% end %>
+</h3>
+<h3>Members:</h3>
+<% @group.users.each do |user| %>
+    <%= user.first_name %>&nbsp;<%= user.last_name %><br>
+<% end %>

@@ -1,0 +1,33 @@
+<h2>Hi,&nbsp;<%= current_user.first_name %>&nbsp;<%= current_user.last_name %>!</h2>
+<div class="container">
+    <div class="panel">
+        <h3>Here are some organizations you may join:</h3>
+        <% @groups.each do |group| %>
+            <p>
+                <a href="<%= groups_show_path group.id %>"><%= group.name %></a>
+                <% if session[:user_id] == group.creator %><a href="<%= groups_destroy_path group.id %>" data-method="delete"><button type="button">Delete Group</button></a><% end %>
+                <br>Members: <%= group.usercount %>
+                <br><%= group.desc %>
+            </p>
+        <% end %>
+    </div>
+    <div class="panel">
+        <h2>Log In</h2>
+        <form name="creategroup" action="<%= groups_create_path %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <table>
+                <tr>
+                    <td>Group Name:</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Group Description:</td>
+                    <td><textarea name="desc" cols="70" rows="4"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Create Group"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p id="error"><%= error %></p>  
+  <% end %>
+<% end %>
+
+<% if flash[:messages] %>
+  <% flash[:messages].each do |message| %>
+    <p id="message"><%= message %></p>
+  <% end %>
+<% end %>
+
+<div class="container">
+    <div class="panel">
+        <h2>Register</h2>
+        <form name="register" action="<%= users_create_path %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td colspan="3"><input type="text" name="user[first_name]"></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td colspan="3"><input type="text" name="user[last_name]"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td colspan="3"><input type="text" name="user[email]"></td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td><input type="text" name="user[city]"></td>
+                    <td>State:</td>
+                    <td>
+                        <select name="user[state]">
+                            <% $states.each do |state| %>
+                                <option value="<%= state %>"><%= state %></option>
+                            <% end %>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td colspan="3"><input type="password" name="user[password]"></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password:</td>
+                    <td colspan="3"><input type="password" name="user[password_confirmation]"></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><input type="submit" value="Register"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="panel">
+        <h2>Log In</h2>
+        <form name="login" action="<%= sessions_create_path %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <table>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Log In"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Events</title>
+  <%= stylesheet_link_tag    'groups', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+    <div class="header">
+        <% if request.env['PATH_INFO'] != '/groups' %>
+            <a href="<%= groups_index_path %>">Dashboard</a>
+        <% end %>
+        &nbsp;&nbsp;&nbsp;<a href="<%= sessions_destroy_path %>" data-method="delete">Log Out</a>
+    </div>
+
+    <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+            <p id="error"><%= error %></p>  
+        <% end %>
+    <% end %>
+
+    <% if flash[:messages] %>
+        <% flash[:messages].each do |message| %>
+            <p id="message"><%= message %></p>
+        <% end %>
+    <% end %>
+
+    <%= yield %>
+
+</body>
+</html>

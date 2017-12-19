@@ -1,0 +1,15 @@
+<h2>Edit User</h2>
+<form name-"edituser" action="<%= users_update_path session[:user_id] %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input name="_method" type="hidden" value="patch">
+    First Name: <input type="text" name="user[first_name]" value="<%= @user.first_name %>"><br>
+    Last Name: <input type="text" name="user[last_name]" value="<%= @user.last_name %>"><br>
+    Email: <input type="text" name="user[email]" value="<%= @user.email %>"><br>
+    City: <input type="text" name="user[city]" value="<%= @user.city%>">&nbsp;&nbsp;State:&nbsp;
+    <select name="user[state]">
+        <% $states.each do |state| %>
+            <option value="<%= state %>" <% if state == @user.state %>selected<% end %>><%= state %></option>
+        <% end %>
+    </select><br>
+    <input type="submit" value="Update User">
+</form>
