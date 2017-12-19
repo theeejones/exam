@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
     def create
         @group = Group.create(name: params[:name], desc: params[:desc], creator: session[:user_id])
         if @group.invalid?
-            flash[:errors] = @user.errors.full_messages
+            flash[:errors] = @group.errors.full_messages
         else
             Usergroup.create(user_id: session[:user_id], group_id: @group.id)
         end
